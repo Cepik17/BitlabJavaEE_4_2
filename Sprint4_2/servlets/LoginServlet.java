@@ -21,7 +21,6 @@ public class LoginServlet extends HttpServlet {
         if (DButil.checkUser(email,password)) {
             String fullName= DButil.getFullName(email);
             request.setAttribute("fullName",fullName);
-           // response.sendRedirect("/userpage.jsp");
             request.getRequestDispatcher("/userpage.jsp").forward(request,response);
         }else response.sendRedirect("/login.jsp?wronguser");
     }
