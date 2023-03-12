@@ -47,67 +47,8 @@ public class DButil {
         return items;
     }
 
-    public static void addItem(Item item) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("" +
-                    "insert into items(name, price, amount) " +
-                    "values (?,?,?)");
-            statement.setString(1, item.getName());
-            statement.setDouble(2, item.getPrice());
-            statement.executeUpdate();
-            statement.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static Item getById(Long id) {
-        Item item = new Item();
-        try {
-            PreparedStatement statement = connection.prepareStatement("" +
-                    "select * from items i where i.id=?");
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                item.setId(resultSet.getLong("id"));
-                item.setName(resultSet.getString("name"));
-                item.setPrice(resultSet.getDouble("price"));
-            }
-            statement.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return item;
-    }
-
-    public static void editItem(Item item) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("" +
-                    "update items " +
-                    "set name=?, price=?, amount=? " +
-                    "where id=?");
-            statement.setString(1, item.getName());
-            statement.setDouble(2, item.getPrice());
-            statement.setLong(4, item.getId());
-            statement.executeUpdate();
-            statement.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void deleteById(Long id) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("" +
-                    "delete from items i where i.id=?");
-            statement.setLong(1, id);
-            statement.executeUpdate();
-            statement.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+ 
+ 
     public static boolean checkUser(String email, String password) {
         boolean user = false;
         try {
